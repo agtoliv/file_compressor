@@ -34,7 +34,7 @@ This project was born from the need for a **secure, scalable and private solutio
 ## 📏 Business Rules
 
 - Only PDF files are allowed in the MVP
-- Maximum file size for upload: 25MB
+- Maximum file size for upload: 100MB
 - Each upload must be associated with a timestamp and status
 - History must include filename, size before/after, and compression rate
 
