@@ -11,5 +11,5 @@ app.get('/', (_req: Request, res: Response) => {
 });
 
 app.listen(5000, () => {
-  console.log('🚀 Backend rodando em http://localhost:5000');
+  console.log('Backend rodando em http://localhost:5000');
 });
