@@ -1,0 +1,39 @@
+# Node.js e dependências
+**/node_modules/
+**/dist/
+**/build/
+**/.turbo/
+
+# TypeScript
+**/*.tsbuildinfo
+
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Pastas de IDE/Editor
+.vscode/
+.idea/
+
+# Ambientes
+.env
+.env.*.local
+**/.next/
+**/.vercel/
+
+# Uploads temporários
+**/uploads/
+**/tmp/
+
+# Cache
+**/.cache/
+**/.eslintcache
+
+# Outros do Next.js
+**/out/
+**/.swc/
