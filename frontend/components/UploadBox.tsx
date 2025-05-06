@@ -1,14 +1,33 @@
+import { useState } from "react";
+
 export default function UploadBox() {
-    return (
-      <div className="bg-white p-6 rounded-lg shadow-md text-center">
-        <h2 className="text-lg font-semibold mb-4">Upload your PDF</h2>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => alert('Upload button clicked (fake)')}
-        >
-          Select PDF
-        </button>
-      </div>
-    );
-  }
-  
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      console.log("Arquivo selecionado:", selectedFile.name);
+    }
+  };
+
+  return (
+    <div className="border-2 border-dashed border-gray-300 p-6 rounded-xl text-center">
+      <label className="cursor-pointer">
+        <p className="text-gray-700 mb-2">Clique para escolher um PDF</p>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+      </label>
+
+      {file && (
+        <p className="mt-4 text-sm text-green-600">
+          Arquivo selecionado: {file.name}
+        </p>
+      )}
+    </div>
+  );
+}
