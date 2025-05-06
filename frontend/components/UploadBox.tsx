@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function UploadBox() {
@@ -6,6 +6,17 @@ export default function UploadBox() {
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadResult, setUploadResult] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (uploadResult || error) {
+      const timer = setTimeout(() => {
+        setUploadResult(null);
+        setError(null);
+      }, 4000); // desaparece após 4 segundos
+  
+      return () => clearTimeout(timer);
+    }
+  }, [uploadResult, error]);  
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -75,11 +86,11 @@ export default function UploadBox() {
       )}
 
       {error && (
-        <p className="mt-4 text-sm text-red-500">{error}</p>
+        <p className="mt-4 text-sm text-red-600 font-medium">{error}</p>
       )}
 
       {uploadResult && (
-        <p className="mt-4 text-sm text-blue-600">{uploadResult}</p>
+        <p className="mt-4 text-sm text-green-600 font-medium">{uploadResult}</p>
       )}
 
       {file && !error && (
