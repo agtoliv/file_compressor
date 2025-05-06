@@ -2,19 +2,27 @@ import { useState } from "react";
 
 export default function UploadBox() {
   const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string |null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
+    
     if (selectedFile) {
-      setFile(selectedFile);
-      console.log("Arquivo selecionado:", selectedFile.name);
-    }
-  };
+        if (selectedFile.type !== "application/pdf") {
+          setError("Only PDF files are allowed.");
+          setFile(null);
+        } else {
+          setFile(selectedFile);
+          setError(null);
+          console.log("Selected file:", selectedFile.name);
+        }
+      }
+    };
 
   return (
     <div className="border-2 border-dashed border-gray-300 p-6 rounded-xl text-center">
       <label className="cursor-pointer">
-        <p className="text-gray-700 mb-2">Clique para escolher um PDF</p>
+        <p className="text-gray-700 mb-2">click to choose a pdf</p>
         <input
           type="file"
           accept=".pdf"
