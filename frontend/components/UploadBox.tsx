@@ -2,15 +2,15 @@ import { useState } from "react";
 
 export default function UploadBox() {
   const [file, setFile] = useState<File | null>(null);
-  const [error, setError] = useState<string |null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-  
+
     if (selectedFile) {
       const fileName = selectedFile.name.toLowerCase();
       const isPdf = selectedFile.type === "application/pdf" || fileName.endsWith(".pdf");
-  
+
       if (!isPdf) {
         setError("Only PDF files are allowed.");
         setFile(null);
@@ -23,10 +23,14 @@ export default function UploadBox() {
     }
   };
 
+  const formatFileSize = (sizeInBytes: number) => {
+    return (sizeInBytes / (1024 * 1024)).toFixed(2) + " MB";
+  };
+
   return (
     <div className="border-2 border-dashed border-gray-300 p-6 rounded-xl text-center">
       <label className="cursor-pointer">
-        <p className="text-gray-700 mb-2">click to choose a pdf</p>
+        <p className="text-gray-700 mb-2">Click to select a PDF file</p>
         <input
           type="file"
           accept=".pdf"
@@ -36,8 +40,15 @@ export default function UploadBox() {
       </label>
 
       {file && (
-        <p className="mt-4 text-sm text-green-600">
-          Arquivo selecionado: {file.name}
+        <div className="mt-4 text-sm text-green-700">
+          <p><strong>File:</strong> {file.name}</p>
+          <p><strong>Size:</strong> {formatFileSize(file.size)}</p>
+        </div>
+      )}
+
+      {error && (
+        <p className="mt-4 text-sm text-red-500">
+          {error}
         </p>
       )}
     </div>
